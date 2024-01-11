@@ -1,55 +1,51 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-       sort(nums.begin(),nums.end());
-        vector<vector<int>>ans;
-        int cnt=0;
-       
-        if(nums.size()<3)
-            return ans;
-       
-        map<int,char>mp;
-        int zero=0;
-     for(int i=0;i<nums.size()-2;i++)
-        {
-           int left=i+1;
-           int right=nums.size()-1;
-           if(mp[nums[i]]==1)
-            continue;
-            map<int,int>ma;
-            while(left<right)
-            {
-
-                int sum=nums[i]+nums[left]+nums[right];
-                if(sum==0)
-                {
-                    //cout<<i<<" "<<nums[i]<<endl;
-                   if(ma[nums[i]]==1 && ma[nums[left]]==1 && ma[nums[right]]==1)
-                   {
-                       int x=0;
-                       //cout<<"ma " <<i<<" "<<left<<" "<<right<<endl;
-                   }
-                   else{
-                   ans.push_back({nums[i],nums[left],nums[right]});
-                   cout<<nums[i]<<" "<<nums[left]<<" "<<nums[right]<<endl;
-                   }
-                   ma[nums[i]]=1;
-                   ma[nums[right]]=1;
-                   ma[nums[left]]=1;
-                   left++;
-                   right--;
-
-                   //cout<<"baaa " <<i<<" "<<left<<" "<<right<<endl;
-
-                }
-                else if(sum>0)
-                    right--;
-                else
-                    left++;
-            }
-            mp[nums[i]]=1;
+    vector<vector<int>> result;
+       int n = nums.size();
+        if (n < 3) {
+            return result;
         }
-        return ans;
+        
+        sort(nums.begin(), nums.end());
+        
+        for (int i = 0; i < n - 2; i++) {
+            if (nums[i] > 0) {
+                break;
+            }
+            if (i > 0 && nums[i - 1] == nums[i]) {
+                continue;
+            }
+            
+            int j = i + 1;
+            int k = n - 1;
+            
+            while (j < k) {
+                int sum = nums[i] + nums[j] + nums[k];
+                
+                if (sum < 0) {
+                    j++;
+                } else if (sum > 0) {
+                    k--;
+                } else {
+                    result.push_back({nums[i], nums[j], nums[k]});
+                    
+                    while (j < k && nums[j] == nums[j + 1]) {
+                        j++;
+                    }
+                    j++;
+                    
+                    while (j < k && nums[k - 1] == nums[k]) {
+                        k--;
+                    }
+                    k--;
+                }
+            }
+        }
+        
+        return result;
         
     }
 };
+//TC= 0(N^2)
+//SC=O(N)
