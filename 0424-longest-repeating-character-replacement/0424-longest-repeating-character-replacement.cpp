@@ -30,3 +30,5 @@ public:
         return ans;
     }
 };
+//tc=O(N)
+//SC=O(26)
