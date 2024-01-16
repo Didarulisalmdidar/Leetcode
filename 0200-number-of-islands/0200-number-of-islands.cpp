@@ -36,3 +36,4 @@ void dfs(int n,int m,int a,int b ,vector<vector<char>>&grid)
     return ans;
     }
 };
+//TC=O(M*N) SC=O(M*N)
